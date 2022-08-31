@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: d113aabf335ca0bbea2223a8136c2161b7f43659
+  branch: master
+  specs:
+    faker (2.22.0)
+      i18n (>= 1.8.11, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -138,6 +146,10 @@ GEM
       activesupport (= 7.0.3.1)
       bundler (>= 1.15.0)
       railties (= 7.0.3.1)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -189,9 +201,11 @@ DEPENDENCIES
   bootsnap
   debug
   factory_bot_rails
+  faker!
   jwt
   puma (~> 5.0)
   rails (~> 7.0.3, >= 7.0.3.1)
+  rails-controller-testing
   rspec-rails (~> 6.0.0.rc1)
   sqlite3 (~> 1.4)
   tzinfo-data
