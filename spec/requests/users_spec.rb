@@ -1,24 +1,100 @@
-require 'rails_helper'
+require 'swagger_helper'
 
-RSpec.describe UsersController, type: :request do
-  describe "Post /users" do
-    it 'Create a new user' do
-      expect do
-        post users_path, params: {email: 'test@example.com',username: 'test',password: 'password'}
-      end.to change { User.count }.by(1)
+RSpec.describe 'users', type: :request do
+
+  path '/users' do
+
+    get('list users') do
+      response(200, 'successful') do
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+
+    post('create user') do
+      response(200, 'successful') do
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
     end
   end
-  describe "Perform Action on controller" do
-    before(:each) do
-      post users_path, params: {email: 'test@example.com',username: 'test',password: 'password'}
-      post users_path, params: {email: 'test1@example.com',username: 'test1',password: 'password'}
-      post auth_login_path, params: {email: 'test@example.com',password:'password'}
+
+  path '/users/{id}' do
+    # You'll want to customize the parameter types...
+    parameter name: 'id', in: :path, type: :string, description: 'id'
+
+    get('show user') do
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
     end
-    it "GET /users" do
-      body = JSON.parse(response.body)
-      get users_path, headers: {authorization: body["token"]}
-      expect(response).to be_successful
-      expect(assigns(:users)).to eq(User.all)
+
+    patch('update user') do
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+
+    put('update user') do
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+
+    delete('delete user') do
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
     end
   end
 end

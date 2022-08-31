@@ -6,7 +6,8 @@ class ApplicationController < ActionController::API
     private
     def authenticate_request
         header = request.headers["Authorization"]
-        header = header.split(" ").last if header
+        return render json: {message: "Unauthentirize Request"}, status: :unauthorized if header.nil?
+        header = header.split(" ").last unless header.nil?
         decoded = jwt_decode(header)
 
         @current_user = User.find(decoded[:user_id])
